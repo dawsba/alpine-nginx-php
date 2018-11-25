@@ -2,4 +2,4 @@
 
 AlpineLinux with NGINX Webserver and PHP7  
 
-more see: https://wiki.alpinelinux.org/wiki/Nginx_with_PHP#PHP7_Installation
+See https://wiki.alpinelinux.org/wiki/Nginx_with_PHP#PHP7_Installation for more information or to install more PHP packages!

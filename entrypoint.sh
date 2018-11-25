@@ -1,11 +1,11 @@
-#!/bin/bash
+#!/bin/sh
 #set -e
 
 # Set TimeZone
 if [ ! -z "$TZ" ]; then
 	echo ">> set timezone"
 	cp /usr/share/zoneinfo/${TZ} /etc/localtime
-	echo ${TZ} >  /etc/timezone
+	echo ${TZ} > /etc/timezone
 	date
 	sed -i "s|;*date.timezone =.*|date.timezone = ${TZ}|i" /etc/php7/php.ini
 fi
@@ -13,7 +13,6 @@ fi
 # Display PHP error's or not
 if [[ "$PHP_ERRORS" == "1" ]] ; then
 	echo ">> set display_errors"
-	echo "display_errors = On" >> /etc/php7/conf.d/z_custom.ini
 	sed -i "s|display_errors\s*=\s*Off|display_errors = On|i" /etc/php7/php.ini
 fi
 

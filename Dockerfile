@@ -51,7 +51,7 @@ VOLUME ["/etc/nginx/conf.d/","/etc/ssl/nginx","/var/www/html"]
 EXPOSE 80 443
 
 # Define main command
-#ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
 
 # Define default command
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
