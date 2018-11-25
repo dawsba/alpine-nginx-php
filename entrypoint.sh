@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+#set -e
 
 # Set TimeZone
 if [ ! -z "$TZ" ]; then
