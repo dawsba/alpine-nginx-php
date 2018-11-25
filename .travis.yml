@@ -1,10 +1,10 @@
 services:
-    - docker
+  - docker
 
 env:
-    global:
-        - COMMIT=${TRAVIS_COMMIT::8}
-        - REPO=${DOCKER_USERNAME}/alpine-nginx-php
+  global:
+    - COMMIT=${TRAVIS_COMMIT::8}
+    - REPO=${DOCKER_USERNAME}/alpine-nginx-php
 
 script:
   - docker --version
