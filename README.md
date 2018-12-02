@@ -9,7 +9,9 @@ AlpineLinux with NGINX und PHP7 on x86_64
 See https://wiki.alpinelinux.org/wiki/Nginx_with_PHP#PHP7_Installation for more information or to install more PHP packages!
 
 ### How to use this image (example)
-* ``` $ docker run --name php -d -p 80:80 -v ${PWD}/html:/var/www/html -e PHP_ERRORS=1 -e PHP_UPLOAD_MAX_FILESIZE=250 tobi312/alpine-nginx-php ``` 
+* ``` $ docker run --name alpine-nginx-php-container -d -p 80:80 -v ${PWD}/html:/var/www/html -e PHP_ERRORS=1 -e PHP_UPLOAD_MAX_FILESIZE=250 tobi312/alpine-nginx-php ``` 
+  
+* Own Dockerfile: ```echo -e "FROM tobi312/alpine-nginx-php:latest\napk --no-cache add git\nCOPY *.sh /entrypoint.d/" > Dockerfile```
 
 ### Environment Variables
 * `TZ` (Default: Europe/Berlin)

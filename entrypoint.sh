@@ -46,6 +46,13 @@ if [ ! -z "$PHP_MAX_FILE_UPLOADS" ]; then
 	sed -i "s|;*max_file_uploads =.*|max_file_uploads = ${PHP_MAX_FILE_UPLOADS}|i" /etc/php7/php.ini
 fi
 
+# more entrypoint-files
+for f in /entrypoint.d/*; do
+	chmod +x $f
+	/bin/sh $f
+done
+
+
 # exec CMD
 echo ">> exec docker CMD"
 echo "$@"
