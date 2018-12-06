@@ -15,7 +15,7 @@ ENV WWW_USER=www
 RUN addgroup -S $WWW_USER && adduser -D -S -h /var/cache/$WWW_USER -s /sbin/nologin -G $WWW_USER $WWW_USER && \
 	apk --no-cache add \
 	tzdata \
-	#git wget curl nano \
+	#git wget curl nano zip unzip \
 	supervisor \
 	nginx \
 	php7 php7-common php7-fpm php7-opcache \
