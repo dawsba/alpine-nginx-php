@@ -4,6 +4,7 @@
 -	[`latest` (*Dockerfile*)](https://github.com/Tob1asDocker/alpine-nginx-php/blob/master/Dockerfile)
 -	[`extended` (*Dockerfile*)](https://github.com/Tob1asDocker/alpine-nginx-php/blob/master/Dockerfile-extended)
 -	[`arm` (*Dockerfile*)](https://github.com/Tob1asDocker/alpine-nginx-php/blob/master/Dockerfile-arm) (Raspberry Pi)
+-	[`arm-extended` (*Dockerfile*)](https://github.com/Tob1asDocker/alpine-nginx-php/blob/master/Dockerfile-arm-extended) (Raspberry Pi)
 
 ### Information:
 AlpineLinux with NGINX und PHP7 on x86_64  
