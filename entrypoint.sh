@@ -48,10 +48,11 @@ fi
 
 # more entrypoint-files
 for f in /entrypoint.d/*; do
-	chmod +x $f
-	/bin/sh $f
+	if [ -e "$f" ] ; then 
+		chmod +x $f
+		/bin/sh $f
+	fi
 done
-
 
 # exec CMD
 echo ">> exec docker CMD"
