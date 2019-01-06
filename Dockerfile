@@ -23,6 +23,7 @@ RUN addgroup -S $WWW_USER && adduser -D -S -h /var/cache/$WWW_USER -s /sbin/nolo
 	&& mkdir -p /etc/ssl/nginx \
 	&& mkdir -p /var/www/html \ 
 	&& chown -R $WWW_USER:$WWW_USER /var/www/html \
+	&& chown -R $WWW_USER:$WWW_USER /var/tmp/nginx \
 	&& sed -i "s/ssl_session_cache shared:SSL:2m;/#ssl_session_cache shared:SSL:2m;/g" /etc/nginx/nginx.conf \
 	&& sed -i "s/user nginx;/user ${WWW_USER};/g" /etc/nginx/nginx.conf \
 	#&& sed -i "s/client_max_body_size 1m;/client_max_body_size 0;/g" /etc/nginx/nginx.conf \
