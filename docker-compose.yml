@@ -1,0 +1,58 @@
+#
+# Docker Compose for tobi312/alpine-nginx-php:TAG
+# created 07.01.2019 by T.H.
+#
+# sudo docker-compose up -d
+#
+
+version: "2.4"
+
+services:
+  
+  alpine-nginx-php-container:
+    #image: tobi312/alpine-nginx-php:latest
+    image: tobi312/alpine-nginx-php:extended 
+    #image: tobi312/alpine-nginx-php:arm
+    #image: tobi312/alpine-nginx-php:arm-extended
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./html:/var/www/html
+    #  - ./nginx:/etc/nginx/conf.d:ro
+    #  - ./ssl:/etc/ssl/nginx:ro
+    environment:
+      TZ: "Europe/Berlin"
+      PHP_ERRORS: 1
+      #PHP_MEM_LIMIT: 128
+      PHP_POST_MAX_SIZE: 250
+      PHP_UPLOAD_MAX_FILESIZE: 250
+      #PHP_MAX_FILE_UPLOADS: 20
+    depends_on:
+      - ipv6nat
+    networks:
+      anpc:
+    
+  ipv6nat:
+    image: robbertkl/ipv6nat:latest
+    #image: robbertkl/ipv6nat:latest-armhf
+    restart: unless-stopped
+    #privileged: true
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    network_mode: "host"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /lib/modules:/lib/modules:ro
+
+networks:
+  anpc:
+    name: anpc
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.30.0.0/24
+        - subnet: fd30:dead:beef::/48
