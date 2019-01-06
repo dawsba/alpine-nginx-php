@@ -7,7 +7,7 @@
 -	[`arm-extended` (*Dockerfile*)](https://github.com/Tob1asDocker/alpine-nginx-php/blob/master/Dockerfile-arm-extended) (Raspberry Pi)
 
 ### Information:
-AlpineLinux with NGINX und PHP7 on x86_64  
+AlpineLinux with NGINX und PHP7 on x86_64 and arm  
 See https://wiki.alpinelinux.org/wiki/Nginx_with_PHP#PHP7_Installation for more information or to install more PHP packages!
 
 ### How to use this image (example)
