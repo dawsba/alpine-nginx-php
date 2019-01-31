@@ -1,5 +1,5 @@
 # Pull base image
-FROM resin/raspberry-pi-alpine
+FROM balenalib/raspberry-pi-alpine:latest
 
 # Label for Information about this Image.
 LABEL maintainer="Tobias Hargesheimer <docker@ison.ws>" \
