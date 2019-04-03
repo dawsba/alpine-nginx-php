@@ -1,24 +1,41 @@
 # Pull base image
-FROM alpine:3.8
+FROM balenalib/raspberry-pi-alpine:latest
 
 # Label for Information about this Image.
-LABEL maintainer="Tobias Hargesheimer <docker@ison.ws>" \
-	description="AlpineLinux with NGINX Webserver and PHP7"
+LABEL org.opencontainers.image.authors="Tobias Hargesheimer <docker@ison.ws>" \
+	org.opencontainers.image.title="alpine-nginx-php" \
+	org.opencontainers.image.description="AlpineLinux with NGINX Webserver and PHP7 (extended) on arm arch" \
+	org.opencontainers.image.licenses="Apache-2.0" \
+	org.opencontainers.image.url="https://hub.docker.com/r/tobi312/alpine-nginx-php" \
+	org.opencontainers.image.source="https://github.com/Tob1asDocker/alpine-nginx-php"
 
 # Define variable
+ARG CROSS_BUILD_START=":"
+ARG CROSS_BUILD_END=":"
+
 ENV LANG C.UTF-8
 ENV TZ Europe/Berlin
 ENV TERM=xterm
 ENV WWW_USER=www
 
+RUN [ ${CROSS_BUILD_START} ]
+
 # Install
 RUN addgroup -S $WWW_USER && adduser -D -S -h /var/cache/$WWW_USER -s /sbin/nologin -G $WWW_USER $WWW_USER && \
 	apk --no-cache add \
 	tzdata \
-	#git wget curl nano zip unzip \
+	git wget curl nano zip unzip \
 	supervisor \
 	nginx \
 	php7 php7-common php7-fpm php7-opcache \
+	php7-mcrypt php7-soap php7-openssl php7-gmp php7-pdo_odbc php7-json php7-dom php7-yaml \
+	php7-pdo php7-zip php7-mysqli php7-sqlite3 php7-apcu php7-pdo_pgsql php7-bcmath \
+	php7-gd php7-odbc php7-pdo_mysql php7-pdo_sqlite php7-gettext php7-xmlreader php7-imagick \
+	php7-xmlrpc php7-bz2 php7-iconv php7-pdo_dblib php7-curl php7-ctype php7-zlib \
+	php7-xml php7-phar php7-intl php7-mbstring php7-xsl php7-pgsql php7-session php7-mcrypt \
+	php7-imap php7-ldap php7-exif php7-fileinfo php7-dev php7-mongodb php7-memcached php7-redis \
+	#curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer  \
+	composer \
 	&& mkdir -p /run/nginx \
 	&& mkdir -p /etc/ssl/nginx \
 	&& mkdir -p /var/www/html \ 
@@ -58,3 +75,5 @@ ENTRYPOINT ["/entrypoint.sh"]
 
 # Define default command
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+
+RUN [ ${CROSS_BUILD_END} ]

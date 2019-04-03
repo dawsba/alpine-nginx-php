@@ -1,17 +1,19 @@
 # Pull base image
-FROM balenalib/raspberry-pi-alpine:latest
+FROM alpine:3.8
 
 # Label for Information about this Image.
-LABEL maintainer="Tobias Hargesheimer <docker@ison.ws>" \
-	description="AlpineLinux with NGINX Webserver and PHP7"
+LABEL org.opencontainers.image.authors="Tobias Hargesheimer <docker@ison.ws>" \
+	org.opencontainers.image.title="alpine-nginx-php" \
+	org.opencontainers.image.description="AlpineLinux with NGINX Webserver and PHP7 (extended) on x86_64 arch" \
+	org.opencontainers.image.licenses="Apache-2.0" \
+	org.opencontainers.image.url="https://hub.docker.com/r/tobi312/alpine-nginx-php" \
+	org.opencontainers.image.source="https://github.com/Tob1asDocker/alpine-nginx-php"
 
 # Define variable
 ENV LANG C.UTF-8
 ENV TZ Europe/Berlin
 ENV TERM=xterm
 ENV WWW_USER=www
-
-RUN [ "cross-build-start" ]
 
 # Install
 RUN addgroup -S $WWW_USER && adduser -D -S -h /var/cache/$WWW_USER -s /sbin/nologin -G $WWW_USER $WWW_USER && \
@@ -53,8 +55,6 @@ COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY source /var/www/html
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
-
-RUN [ "cross-build-end" ]
 
 # Define workdir
 WORKDIR /var/www/html
