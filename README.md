@@ -1,4 +1,4 @@
-# AlpineLinux with NGINX and PHP7.2 on x86_64 and arm
+# AlpineLinux with NGINX 1.16 and PHP7.3 on x86_64 and arm
 
 ### Supported tags and respective `Dockerfile` links
 -	[`latest` (*Dockerfile*)](https://github.com/Tob1asDocker/alpine-nginx-php/blob/master/alpine.x86_64.Dockerfile)
