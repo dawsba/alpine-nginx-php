@@ -1,5 +1,5 @@
 # Pull base image
-FROM balenalib/raspberry-pi-alpine:latest
+FROM arm32v7/alpine:3.10
 
 # Label for Information about this Image.
 LABEL org.opencontainers.image.authors="Tobias Hargesheimer <docker@ison.ws>" \
@@ -10,15 +10,10 @@ LABEL org.opencontainers.image.authors="Tobias Hargesheimer <docker@ison.ws>" \
 	org.opencontainers.image.source="https://github.com/Tob1asDocker/alpine-nginx-php"
 
 # Define variable
-ARG CROSS_BUILD_START=":"
-ARG CROSS_BUILD_END=":"
-
 ENV LANG C.UTF-8
 ENV TZ Europe/Berlin
 ENV TERM=xterm
 ENV WWW_USER=www
-
-RUN [ ${CROSS_BUILD_START} ]
 
 # Install
 RUN addgroup -S $WWW_USER && adduser -D -S -h /var/cache/$WWW_USER -s /sbin/nologin -G $WWW_USER $WWW_USER && \
@@ -67,5 +62,3 @@ ENTRYPOINT ["/entrypoint.sh"]
 
 # Define default command
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
-
-RUN [ ${CROSS_BUILD_END} ]
