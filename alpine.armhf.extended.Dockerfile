@@ -33,7 +33,8 @@ RUN addgroup -S $WWW_USER && adduser -D -S -h /var/cache/$WWW_USER -s /sbin/nolo
 	php7-gd php7-odbc php7-pdo_mysql php7-pdo_sqlite php7-gettext php7-xmlreader php7-imagick \
 	php7-xmlrpc php7-bz2 php7-iconv php7-pdo_dblib php7-curl php7-ctype php7-zlib \
 	php7-xml php7-phar php7-intl php7-mbstring php7-xsl php7-pgsql php7-session php7-mcrypt \
-	php7-imap php7-ldap php7-exif php7-fileinfo php7-dev php7-mongodb php7-memcached php7-redis \
+	php7-imap php7-ldap php7-exif php7-fileinfo php7-dev php7-memcached php7-redis \
+	# php7-mongodb \
 	#curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer  \
 	composer \
 	&& mkdir -p /run/nginx \
