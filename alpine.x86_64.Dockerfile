@@ -1,5 +1,5 @@
 # Pull base image
-FROM alpine:3.10
+FROM alpine:3.11
 
 # Label for Information about this Image.
 LABEL org.opencontainers.image.authors="Tobias Hargesheimer <docker@ison.ws>" \
