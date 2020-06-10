@@ -19,6 +19,8 @@ ENV WWW_USER_UID=1000
 # Install
 RUN addgroup -g $WWW_USER_UID -S $WWW_USER && \
     adduser -D -S -h /var/cache/$WWW_USER -s /sbin/nologin $WWW_USER -G $WWW_USER -u $WWW_USER_UID && \
+    addgroup $WWW_USER root && \
+    addgroup $WWW_USER adm && \
 	apk --no-cache add \
 	tzdata \
 	#git wget curl nano zip unzip \
