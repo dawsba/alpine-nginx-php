@@ -2,27 +2,29 @@
 FROM arm32v7/alpine:3.11
 
 # Label for Information about this Image.
-LABEL org.opencontainers.image.authors="Tobias Hargesheimer <docker@ison.ws>" \
-	org.opencontainers.image.title="alpine-nginx-php" \
-	org.opencontainers.image.description="AlpineLinux with NGINX Webserver and PHP7 on arm arch" \
+LABEL org.opencontainers.image.authors="Barrie Dawson <bdawson@pandorasystems.net>" \
+	org.opencontainers.image.title="pi-alpine-nginx-php" \
+	org.opencontainers.image.description="AlpineLinux with NGINX Webserver and PHP7 on arm arch for PI" \
 	org.opencontainers.image.licenses="Apache-2.0" \
 	org.opencontainers.image.url="https://hub.docker.com/r/tobi312/alpine-nginx-php" \
 	org.opencontainers.image.source="https://github.com/Tob1asDocker/alpine-nginx-php"
 
 # Define variable
 ENV LANG C.UTF-8
-ENV TZ Europe/Berlin
+ENV TZ Europe/London
 ENV TERM=xterm
-ENV WWW_USER=www
+ENV WWW_USER=pi
+ENV WWW_USER_UID=1000
 
 # Install
-RUN addgroup -S $WWW_USER && adduser -D -S -h /var/cache/$WWW_USER -s /sbin/nologin -G $WWW_USER $WWW_USER && \
+RUN addgroup -g $WWW_USER_UID -S $WWW_USER && \
+    adduser -D -S -h /var/cache/$WWW_USER -s /sbin/nologin $WWW_USER -G $WWW_USER -u $WWW_USER_UID && \
 	apk --no-cache add \
 	tzdata \
 	#git wget curl nano zip unzip \
 	supervisor \
 	nginx \
-	php7 php7-common php7-fpm php7-opcache \
+	php7 php7-common php7-fpm php7-opcache php7-mcrypt php7-soap php7-openssl php7-gmp php7-pdo_odbc php7-json php7-dom php7-pdo php7-zip php7-mysqli php7-sqlite3 php7-apcu php7-pdo_pgsql php7-bcmath php7-gd php7-odbc php7-pdo_mysql php7-pdo_sqlite php7-gettext php7-xmlreader php7-xmlrpc php7-bz2 php7-iconv php7-pdo_dblib php7-curl php7-ctype \
 	&& mkdir -p /run/nginx \
 	&& mkdir -p /etc/ssl/nginx \
 	&& mkdir -p /var/www/html \ 
@@ -45,8 +47,8 @@ RUN addgroup -S $WWW_USER && adduser -D -S -h /var/cache/$WWW_USER -s /sbin/nolo
 COPY config/nginx_default.conf /etc/nginx/conf.d/default.conf
 COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY source /var/www/html
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+#COPY entrypoint.sh /entrypoint.sh
+#RUN chmod +x /entrypoint.sh
 
 # Define workdir
 WORKDIR /var/www/html
@@ -58,7 +60,7 @@ VOLUME ["/etc/nginx/conf.d/","/etc/ssl/nginx","/var/www/html"]
 EXPOSE 80 443
 
 # Define main command
-ENTRYPOINT ["/entrypoint.sh"]
+#ENTRYPOINT ["/entrypoint.sh"]
 
 # Define default command
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]

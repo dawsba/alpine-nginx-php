@@ -48,7 +48,7 @@ fi
 
 # more entrypoint-files
 for f in /entrypoint.d/*; do
-	if [ -e "$f" ] ; then 
+	if [ -e "$f" ] ; then
 		chmod +x $f
 		/bin/sh $f
 	fi
